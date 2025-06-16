@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta cjarset = "UTF-8">
+    <title>Forget Password</title>
+    <meta http-equiv="X-Frame-Options" comntent="DENY">
+  </head>
+  <body>
+
+    <center>
+      <h1>Enter email </h1>
+      <form action="sendmail/index.php" method="POST" >
+        <input type="email" name="email" value="" placeholder="your@email.com" required></br>
+       <?php
+        session_start();
+        if (empty($_SESSION['csrf_token'])){
+          $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        ?>
+
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>"
+        <input type="submit" value="Submit">
+      </form>
+    </center>
+  </body>
+</html>
